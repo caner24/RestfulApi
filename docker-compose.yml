@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  restfulapi:
+    image: ${DOCKER_REGISTRY-}restfulapi
+    build:
+      context: .
+      dockerfile: RestfulApi/Dockerfile
+  redis:
+    image: redis
+    ports:
+     - 6379:6379
