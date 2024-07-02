@@ -12,7 +12,12 @@ using RestfulApi.Entity.Helpers;
 using RestfulApi.Extensions;
 using Serilog;
 using RestfulApi.Validations.FluentValidation;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
+
+//<summary>Global log işlemleri için halihazırda serilog kullanılmakta olduğu için middleware(sadece actiona girildi gibi çok basit düzeyde) eklenmedi.</summary>
 Log.Logger = new LoggerConfiguration()
         .WriteTo.Console()
         .CreateLogger();
@@ -46,6 +51,8 @@ try
         app.UseSwaggerUI();
     }
 
+
+
     #region SeedData
     //<summary> Demo ürün </summary>
     RestfulApiContext context = new RestfulApiContext();
@@ -61,14 +68,30 @@ try
     await context.SaveChangesAsync();
     #endregion
 
+
+    #region User.Api
+    app.MapGroup("/api/identity").MapIdentityApi<User>();
+
+    //<summary>Oturumu doğrulayan kullanıcıya verilecek mesaj</summary>
+    app.MapGroup("/api/user").MapGet("/authorize", (ClaimsPrincipal claimsPrincipal) =>
+    {
+        var user = claimsPrincipal.Claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value;
+        var response = new
+        {
+            User = user,
+            Message = "Giriş başarili !."
+        };
+        return Results.Ok(response);
+    }).RequireAuthorization();
+    #endregion
+
     app.UseExceptionHandler();
     app.UseCors("CorsPolicy");
     app.UseOutputCache();
-
     app.UseHttpsRedirection();
+    app.UseAuthentication();
     app.UseAuthorization();
     app.MapControllers();
-
     app.Run();
 }
 catch (Exception ex)

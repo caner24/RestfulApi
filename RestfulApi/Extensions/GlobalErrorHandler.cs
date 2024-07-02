@@ -6,16 +6,11 @@ namespace RestfulApi.Extensions
 {
     public class GlobalErrorHandler : IExceptionHandler
     {
+        //<summary>Global exception middleware i oluşturun -> Bu işlem için .net 8 ile gelen IExceptionMiddleware projeye dahil edilmişti.</summary>
         public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
         {
             if (exception is not null)
             {
-
-                //var problemDetails = new ProblemDetails
-                //{
-                //    Status = StatusCodes.Status500InternalServerError,
-                //    Title = "Server error"
-                //};
 
                 var statusCodes = exception switch
                 {

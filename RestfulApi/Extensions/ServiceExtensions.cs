@@ -27,8 +27,20 @@ namespace RestfulApi.Extensions
 
         public static void ConfigureInMemoryDb(this IServiceCollection services)
         {
-            services.AddDbContext<RestfulApiContext>(_ => _.UseInMemoryDatabase("ProductDemoDb"));
-        }
+            services.AddDbContext<RestfulApiContext>(options => options.UseInMemoryDatabase("ProductDemoDb"));
+
+            //   <summary>Fake bir kullanıcı giriş işlemleri için kullanıcı giriş kayıt olma işlemleri için .net 8 ile gelen IdentityApiEndpoints kulallanıldı.</summary>
+            services.AddIdentityApiEndpoints<User>(options =>
+            {
+                options.SignIn.RequireConfirmedEmail = false;
+                options.User.RequireUniqueEmail = true;
+                options.Password.RequireDigit = false;
+                options.Password.RequireUppercase = false;
+                options.Lockout.AllowedForNewUsers = true;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
+                options.Lockout.MaxFailedAccessAttempts = 3;
+            }).AddEntityFrameworkStores<RestfulApiContext>();
+    }
 
         public static void ConfigureMapping(this IServiceCollection services)
         {

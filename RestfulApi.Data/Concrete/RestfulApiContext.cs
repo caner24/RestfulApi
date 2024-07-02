@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using RestfulApi.Entity;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace RestfulApi.Data.Concrete
 {
-    public class RestfulApiContext : DbContext
+    public class RestfulApiContext : IdentityDbContext<User>
     {
         public RestfulApiContext(DbContextOptions<RestfulApiContext> options) : base(options)
         {
