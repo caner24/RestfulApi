@@ -65,6 +65,9 @@ try
     };
 
     var prod = await context.Product.AddAsync(product);
+    var bookDetail = new Book { Id = 1, Author = "Caner Ay Celep", BookName = "Patika Dev.", PublishDate = DateTime.Now };
+    var book = await context.Book.AddAsync(bookDetail);
+
     await context.SaveChangesAsync();
     #endregion
 

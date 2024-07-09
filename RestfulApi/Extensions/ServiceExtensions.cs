@@ -10,6 +10,8 @@ using RestfulApi.Entity;
 using RestfulApi.Validations.FluentValidation;
 using System.Reflection;
 using RestfulApi.Application.Product.Queries.Request;
+using RestfulApi.Application.Book.Commands.Request;
+using RestfulApi.Application.Book.Queries.Request;
 
 namespace RestfulApi.Extensions
 {
@@ -40,7 +42,7 @@ namespace RestfulApi.Extensions
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
                 options.Lockout.MaxFailedAccessAttempts = 3;
             }).AddEntityFrameworkStores<RestfulApiContext>();
-    }
+        }
 
         public static void ConfigureMapping(this IServiceCollection services)
         {
@@ -72,9 +74,13 @@ namespace RestfulApi.Extensions
             services.AddScoped<IValidator<UpdateProductPartialCommandRequest>, UpdatePartialValidation>();
             services.AddScoped<IValidator<GetProductByIdQueryRequest>, GetProductDtoValidation>();
             services.AddScoped<IValidator<DeleteProductCommandRequest>, DeleteProductDtoValidation>();
+            services.AddScoped<IValidator<UpdateBookCommandRequest>, UpdateBookValidator>();
+            services.AddScoped<IValidator<GetBookByIdQueryRequest>, GetBookByIdDtoValidator>();
+            services.AddScoped<IValidator<DeleteBookByIdCommandRequest>, DeleteBookByIdValidator>();
             services.AddScoped<IDataShaper<Product>, DataShaper<Product>>();
             services.AddScoped<ISortHelper<Product>, SortHelper<Product>>();
             services.AddScoped<IProductDal, ProductDal>();
+            services.AddScoped<IBookDal, BookDal>();
         }
     }
 }

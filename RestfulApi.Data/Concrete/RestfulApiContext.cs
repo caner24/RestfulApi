@@ -22,6 +22,8 @@ namespace RestfulApi.Data.Concrete
         public DbSet<Product> Product { get; set; }
         public DbSet<ProductDetail> ProductDetail { get; set; }
 
+        public DbSet<Book> Book { get; set; }
+
 
         //<summary> Kalıcı bir veritabanına gereksinim duyulmadığı için proje derlenip kapatılınca veri tabanındakilerin silinmesini istediğim için inmemory kullandım. </summary>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
