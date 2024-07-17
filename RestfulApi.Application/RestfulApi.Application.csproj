@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Author\Queries\Response\" />
     <Folder Include="Product\Queries\Response\" />
   </ItemGroup>
 

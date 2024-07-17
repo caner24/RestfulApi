@@ -12,6 +12,9 @@ using System.Reflection;
 using RestfulApi.Application.Product.Queries.Request;
 using RestfulApi.Application.Book.Commands.Request;
 using RestfulApi.Application.Book.Queries.Request;
+using RestfulApi.Application.Author.Commands.Request;
+using RestfulApi.Entity.Dto;
+using RestfulApi.Application.Author.Queries.Request;
 
 namespace RestfulApi.Extensions
 {
@@ -77,10 +80,20 @@ namespace RestfulApi.Extensions
             services.AddScoped<IValidator<UpdateBookCommandRequest>, UpdateBookValidator>();
             services.AddScoped<IValidator<GetBookByIdQueryRequest>, GetBookByIdDtoValidator>();
             services.AddScoped<IValidator<DeleteBookByIdCommandRequest>, DeleteBookByIdValidator>();
+
+
+            services.AddScoped<IValidator<AddAuthorCommandRequest>, AddAuthorDtoValidator>();
+            services.AddScoped<IValidator<GetAuthorByIdQueryRequest>, GetAuthorByIdDtoValidator>();
+            services.AddScoped<IValidator<UpdateAuthorCommandRequest>, UpdateAuthorDtoValidator>();
+            services.AddScoped<IValidator<DeleteAuthorCommandRequest>, DeleteAuthorDtoValidator>();
+
             services.AddScoped<IDataShaper<Product>, DataShaper<Product>>();
             services.AddScoped<ISortHelper<Product>, SortHelper<Product>>();
+            services.AddScoped<IDataShaper<Author>, DataShaper<Author>>();
+            services.AddScoped<ISortHelper<Author>, SortHelper<Author>>();
             services.AddScoped<IProductDal, ProductDal>();
             services.AddScoped<IBookDal, BookDal>();
+            services.AddScoped<IAuthorDal, AuthorDal>();
         }
     }
 }

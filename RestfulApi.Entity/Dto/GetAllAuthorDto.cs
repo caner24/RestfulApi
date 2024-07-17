@@ -6,16 +6,14 @@ using System.Threading.Tasks;
 
 namespace RestfulApi.Entity.Dto
 {
-    public record GetAllProductDto
+    public record GetAllAuthorDto
     {
         public string? Name { get; init; }
-        public double MinPrice { get; init; }
-        public double MaxPrice { get; init; }
+        public DateTime MinBirthDate { get; init; }
+        public DateTime MaxBirthDate { get; init; }
         public string? OrderBy { get; init; }
         public string? Fields { get; init; }
-        public int PageNumber { get; init; } = 1;
-        public int PageSize { get; init; }
-
-
+        public int PageNumber { get; set; } = 1;
+        public int PageSize { get; set; } = 50;
     }
 }

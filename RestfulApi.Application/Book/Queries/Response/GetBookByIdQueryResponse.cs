@@ -11,7 +11,7 @@ namespace RestfulApi.Application.Book.Queries.Response
     {
         public int Id { get; init; }
         public string BookName { get; init; }
-        public string Author { get; init; }
+        public Entity.Author Author { get; init; }
         public DateTime PublishDate { get; init; }
         private DateTime AdedDate { get; init; }
 

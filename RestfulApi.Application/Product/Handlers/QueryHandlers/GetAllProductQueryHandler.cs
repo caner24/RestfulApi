@@ -22,13 +22,13 @@ namespace RestfulApi.Application.Product.Handlers.QueryHandlers
 
         public async Task<PagedList<ShapedEntity>> Handle(GellAllProductQueryRequest request, CancellationToken cancellationToken)
         {
-            var products = _productDal.GetAll();
+            var products = _productDal.GetAll(x => x.ProductPrice >= request.MinPrice && request.MaxPrice <= request.MaxPrice);
 
             SearchByName(ref products, request.Name);
             var sortedProducts = _sortHelper.ApplySort(products, request.OrderBy);
             var shapedProducts = _dataShaper.ShapeData(sortedProducts, request.Fields);
 
-            return  PagedList<ShapedEntity>.ToPagedList(shapedProducts,
+            return PagedList<ShapedEntity>.ToPagedList(shapedProducts,
           request.PageNumber,
           request.PageSize);
         }

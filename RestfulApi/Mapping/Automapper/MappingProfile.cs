@@ -3,6 +3,7 @@ using RestfulApi.Application.Book.Commands.Request;
 using RestfulApi.Application.Book.Queries.Response;
 using RestfulApi.Entity;
 using RestfulApi.Entity.Dto;
+using RestfulApi.Entity.Helpers;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace RestfulApi.Mapping.Automapper
@@ -27,6 +28,12 @@ namespace RestfulApi.Mapping.Automapper
 
             CreateMap<UpdateBookCommandRequest, Book>().ReverseMap();
             CreateMap<GetBookByIdQueryResponse, Book>().ReverseMap();
+
+            CreateMap<AddAuthorDto, Author>();
+            CreateMap<UpdateAuthorDto, Author>();
+            CreateMap<GetAllAuthorDto, AuthorParameters>();
+
+
 
         }
 

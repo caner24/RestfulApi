@@ -11,10 +11,10 @@ namespace RestfulApi.Entity
     {
         public int Id { get; set; }
         public string BookName { get; set; }
-        public string Author { get; set; }
         public DateTime PublishDate { get; set; }
         private DateTime AdedDate => DateTime.Now;
-
+        public Guid AuthorId { get; set; }
+        public Author Author { get; set; }
 
     }
 }

@@ -10,7 +10,7 @@ namespace RestfulApi.Entity.Dto
     {
         public int Id { get; init; }
         public string BookName { get; init; }
-        public string Author { get; init; }
+        public Guid AuthorId { get; init; }
         public DateTime PublishDate { get; init; }
     }
 }

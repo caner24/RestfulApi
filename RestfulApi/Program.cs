@@ -15,6 +15,7 @@ using RestfulApi.Validations.FluentValidation;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using Microsoft.Extensions.Options;
 
 
 //<summary>Global log işlemleri için halihazırda serilog kullanılmakta olduğu için middleware(sadece actiona girildi gibi çok basit düzeyde) eklenmedi.</summary>
@@ -29,8 +30,10 @@ try
     builder.Services.AddControllers(config =>
     { config.RespectBrowserAcceptHeader = true; config.ReturnHttpNotAcceptable = true; })
     .AddNewtonsoftJson(opt =>
+    {
         opt.SerializerSettings.ReferenceLoopHandling =
-        Newtonsoft.Json.ReferenceLoopHandling.Ignore
+        Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+    }
     );
     builder.Services.AddExceptionHandler<GlobalErrorHandler>();
     builder.Services.AddProblemDetails();
@@ -65,7 +68,7 @@ try
     };
 
     var prod = await context.Product.AddAsync(product);
-    var bookDetail = new Book { Id = 1, Author = "Caner Ay Celep", BookName = "Patika Dev.", PublishDate = DateTime.Now };
+    var bookDetail = new Book { Id = 1, Author = new Author { Name = "Caner Ay", Surname = "Celep", BirthDate = DateTime.Now.Date }, BookName = "Patika Dev.", PublishDate = DateTime.Now };
     var book = await context.Book.AddAsync(bookDetail);
 
     await context.SaveChangesAsync();

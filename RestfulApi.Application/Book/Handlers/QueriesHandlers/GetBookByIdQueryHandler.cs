@@ -23,7 +23,7 @@ namespace RestfulApi.Application.Book.Handlers.QueriesHandlers
         }
         public async Task<GetBookByIdQueryResponse> Handle(GetBookByIdQueryRequest request, CancellationToken cancellationToken)
         {
-            var book = await _bookDal.Get(x => x.Id == request.Id).FirstOrDefaultAsync();
+            var book = await _bookDal.Get(x => x.Id == request.Id).AsNoTracking().Include(x => x.Author).FirstOrDefaultAsync();
             if (book == null)
                 throw new Exception("You searched book did not found");
 

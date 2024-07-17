@@ -23,6 +23,8 @@ namespace RestfulApi.Data.Concrete
         public DbSet<ProductDetail> ProductDetail { get; set; }
 
         public DbSet<Book> Book { get; set; }
+        public DbSet<Author> Author { get; set; }
+
 
 
         //<summary> Kalıcı bir veritabanına gereksinim duyulmadığı için proje derlenip kapatılınca veri tabanındakilerin silinmesini istediğim için inmemory kullandım. </summary>
@@ -41,6 +43,9 @@ namespace RestfulApi.Data.Concrete
             modelBuilder.Entity<Product>().Navigation(x => x.ProductDetail).AutoInclude();
             modelBuilder.Entity<ProductDetail>().HasKey(x => x.ProductId);
             modelBuilder.Entity<ProductDetail>().HasOne(x => x.Product).WithOne(x => x.ProductDetail).HasForeignKey<ProductDetail>(x => x.ProductId);
+
+            // Kitabı yayında olan bir yazar silinememeli. Öncelikle kitap silinmeli, daha sonra yazar silinebilir.
+            modelBuilder.Entity<Book>().HasOne(x => x.Author).WithMany(x => x.Books).HasForeignKey(x => x.AuthorId).OnDelete(DeleteBehavior.Restrict);
             base.OnModelCreating(modelBuilder);
         }
     }
