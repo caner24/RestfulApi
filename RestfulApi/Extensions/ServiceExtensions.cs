@@ -15,6 +15,8 @@ using RestfulApi.Application.Book.Queries.Request;
 using RestfulApi.Application.Author.Commands.Request;
 using RestfulApi.Entity.Dto;
 using RestfulApi.Application.Author.Queries.Request;
+using RestfulApi.Application.Genre.Commands.Request;
+using RestfulApi.Application.Genre.Queries.Request;
 
 namespace RestfulApi.Extensions
 {
@@ -72,7 +74,7 @@ namespace RestfulApi.Extensions
         public static void ServiceRegister(this IServiceCollection services)
         {
             services.AddScoped<ValidationFilterAttribute>();
-            services.AddScoped<IValidator<AddProductCommandRequest>, AddProductValidation>();
+            services.AddScoped<IValidator<AddProductCommandRequest>, AddProductDtoValidation>();
             services.AddScoped<IValidator<UpdateProductCommandRequest>, UpdateProductDtoValidation>();
             services.AddScoped<IValidator<UpdateProductPartialCommandRequest>, UpdatePartialValidation>();
             services.AddScoped<IValidator<GetProductByIdQueryRequest>, GetProductDtoValidation>();
@@ -81,11 +83,16 @@ namespace RestfulApi.Extensions
             services.AddScoped<IValidator<GetBookByIdQueryRequest>, GetBookByIdDtoValidator>();
             services.AddScoped<IValidator<DeleteBookByIdCommandRequest>, DeleteBookByIdValidator>();
 
-
             services.AddScoped<IValidator<AddAuthorCommandRequest>, AddAuthorDtoValidator>();
             services.AddScoped<IValidator<GetAuthorByIdQueryRequest>, GetAuthorByIdDtoValidator>();
             services.AddScoped<IValidator<UpdateAuthorCommandRequest>, UpdateAuthorDtoValidator>();
             services.AddScoped<IValidator<DeleteAuthorCommandRequest>, DeleteAuthorDtoValidator>();
+
+            services.AddScoped<IValidator<AddGenreCommandRequest>, AddGenreValidaton>();
+            services.AddScoped<IValidator<DeleteGenreCommandRequest>, DeleteGenreValidaton>();
+            services.AddScoped<IValidator<GetGenreDetailQueryRequest>, GetGenreValidator>();
+            services.AddScoped<IValidator<UpdateGenreCommandRequest>, UpdateGenreValidator>();
+
 
             services.AddScoped<IDataShaper<Product>, DataShaper<Product>>();
             services.AddScoped<ISortHelper<Product>, SortHelper<Product>>();
@@ -94,6 +101,7 @@ namespace RestfulApi.Extensions
             services.AddScoped<IProductDal, ProductDal>();
             services.AddScoped<IBookDal, BookDal>();
             services.AddScoped<IAuthorDal, AuthorDal>();
+            services.AddScoped<IGenreDal, GenreDal>();
         }
     }
 }

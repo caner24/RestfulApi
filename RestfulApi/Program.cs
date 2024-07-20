@@ -37,7 +37,7 @@ try
     );
     builder.Services.AddExceptionHandler<GlobalErrorHandler>();
     builder.Services.AddProblemDetails();
-    builder.Services.AddValidatorsFromAssemblyContaining<AddProductValidation>();
+    builder.Services.AddValidatorsFromAssemblyContaining<AddAuthorDtoValidator>();
     builder.Services.ConfigureRedisOutputCache(builder.Configuration);
     builder.Services.ConfigureInMemoryDb();
     builder.Services.ConfigureMapping();
@@ -68,9 +68,10 @@ try
     };
 
     var prod = await context.Product.AddAsync(product);
-    var bookDetail = new Book { Id = 1, Author = new Author { Name = "Caner Ay", Surname = "Celep", BirthDate = DateTime.Now.Date }, BookName = "Patika Dev.", PublishDate = DateTime.Now };
+    var bookDetail = new Book { Genre = new HashSet<Genre> { new Genre { GenreName = "Roman" } }, Id = 1, Author = new Author { Name = "Caner Ay", Surname = "Celep", BirthDate = DateTime.Now.Date }, BookName = "Patika Dev.", PublishDate = DateTime.Now };
     var book = await context.Book.AddAsync(bookDetail);
-
+    Guid guid = new Guid("aa2a1a01-f351-4de5-96eb-dcbabe85edfa");
+    var author = new Author { Id = guid, BirthDate = DateTime.Now, Name = "Demo", Surname = "Author" };
     await context.SaveChangesAsync();
     #endregion
 

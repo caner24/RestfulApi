@@ -15,6 +15,8 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestfulApi.Application", "RestfulApi.Application\RestfulApi.Application.csproj", "{EBF6F7A4-74BC-4783-834E-6AA5363D0E22}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestfulApi.Test", "RestfulApi.Test\RestfulApi.Test.csproj", "{F2C92795-D926-4B46-AC46-5ADAACECB224}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{EBF6F7A4-74BC-4783-834E-6AA5363D0E22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBF6F7A4-74BC-4783-834E-6AA5363D0E22}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBF6F7A4-74BC-4783-834E-6AA5363D0E22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2C92795-D926-4B46-AC46-5ADAACECB224}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2C92795-D926-4B46-AC46-5ADAACECB224}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2C92795-D926-4B46-AC46-5ADAACECB224}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2C92795-D926-4B46-AC46-5ADAACECB224}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
